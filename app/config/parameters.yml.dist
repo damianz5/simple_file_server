@@ -1,0 +1,7 @@
+parameters:
+    secret: SOME_SECRET
+    upload_directory: data/
+    file_collection_prefix: container-
+    credentials_header_name: AUTHKEY
+    access_list:
+        - supersecretcode1@
