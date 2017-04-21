@@ -27,15 +27,15 @@ class FileCollectionManagerTest extends \PHPUnit_Framework_TestCase
         $this->fileCollectionPrefix = 'test-';
         $this->fileCollectionName = '7d97656c1b4da64e278be1f224b37986';
 
-        $this->location = sprintf("%s%s%s/",
+        $this->location = sprintf('%s%s%s/',
             $this->uploadDirectory,
             $this->fileCollectionPrefix,
             $this->fileCollectionName
         );
 
-        copy($this->uploadDirectory . 'test1.png', $this->location . '1-test1.png');
-        copy($this->uploadDirectory . 'test1.html', $this->location . '2-test1.html');
-        copy($this->uploadDirectory . 'test1.txt', $this->location . '3-test1.txt');
+        copy($this->uploadDirectory.'test1.png', $this->location.'1-test1.png');
+        copy($this->uploadDirectory.'test1.html', $this->location.'2-test1.html');
+        copy($this->uploadDirectory.'test1.txt', $this->location.'3-test1.txt');
 
         $this->manager = new FileCollectionManager(
             $this->uploadDirectory,
@@ -45,9 +45,9 @@ class FileCollectionManagerTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        @unlink($this->location . '1-test1.png');
-        @unlink($this->location . '2-test1.html');
-        @unlink($this->location . '3-test1.txt');
+        @unlink($this->location.'1-test1.png');
+        @unlink($this->location.'2-test1.html');
+        @unlink($this->location.'3-test1.txt');
     }
 
     public function testListFiles()
@@ -124,12 +124,11 @@ class FileCollectionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->getOrCreate('invalid-name');
     }
 
-
     public function testGetOrCreateUsingValidNameWithUnexistingDirectory()
     {
         $validName = md5('some-random-string');
 
-        $location = sprintf("%s%s%s/",
+        $location = sprintf('%s%s%s/',
             $this->uploadDirectory,
             $this->fileCollectionPrefix,
             $validName

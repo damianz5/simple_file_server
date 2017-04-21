@@ -32,22 +32,22 @@ class UploadManagerTest extends \PHPUnit_Framework_TestCase
         $this->fileCollectionPrefix = 'test-';
         $this->fileCollectionName = '7d97656c1b4da64e278be1f224b37986';
 
-        $this->location = sprintf("%s%s%s/",
+        $this->location = sprintf('%s%s%s/',
             $this->uploadDirectory,
             $this->fileCollectionPrefix,
             $this->fileCollectionName
         );
 
-        copy($this->uploadDirectory . 'test1.html', $this->location . 'test1.html');
-        copy($this->uploadDirectory . 'test1.txt', $this->location . 'test1.txt');
-        copy($this->uploadDirectory . 'test1.png', $this->location . 'test1.png');
+        copy($this->uploadDirectory.'test1.html', $this->location.'test1.html');
+        copy($this->uploadDirectory.'test1.txt', $this->location.'test1.txt');
+        copy($this->uploadDirectory.'test1.png', $this->location.'test1.png');
     }
 
     public function tearDown()
     {
-        @unlink($this->location . 'test1.html');
-        @unlink($this->location . 'test1.txt');
-        @unlink($this->location . 'test1.png');
+        @unlink($this->location.'test1.html');
+        @unlink($this->location.'test1.txt');
+        @unlink($this->location.'test1.png');
     }
 
     public function testUploadManager()
@@ -118,7 +118,7 @@ class UploadManagerTest extends \PHPUnit_Framework_TestCase
                 $this->getMockFile('png'),
                 $this->getMockFile('html'),
                 $this->getMockFile('txt'),
-            ]
+            ],
         ];
 
         $requestStack = $this->getMockForRequestStack($files);
@@ -137,7 +137,7 @@ class UploadManagerTest extends \PHPUnit_Framework_TestCase
 
     private function getMockForRequestStack(array $files)
     {
-        $request = Request::create('/', 'POST', array(), array(), $files);
+        $request = Request::create('/', 'POST', [], [], $files);
 
         $request->setSession(new Session(new MockArraySessionStorage()));
         $requestStack = new RequestStack();
@@ -148,7 +148,7 @@ class UploadManagerTest extends \PHPUnit_Framework_TestCase
 
     private function getMockFile($suffix)
     {
-        $file = $this->location . 'test1.' .$suffix;
+        $file = $this->location.'test1.'.$suffix;
 
         return new UploadedFile(
             $file,
@@ -162,7 +162,7 @@ class UploadManagerTest extends \PHPUnit_Framework_TestCase
 
     private function getMockUnsupportedFile($filename)
     {
-        $file = sprintf("%s%s",
+        $file = sprintf('%s%s',
             $this->uploadDirectory,
             $filename
         );

@@ -8,7 +8,7 @@ class FileValidator
 {
     public function validate(UploadedFile $file)
     {
-        if (!in_array($file->guessExtension(), array('png', 'html', 'txt'))) {
+        if (!in_array($file->guessExtension(), ['png', 'html', 'txt'])) {
             return false;
         }
 

@@ -1,16 +1,16 @@
 <?php
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 
 $loader = require __DIR__.'/../vendor/autoload.php';
-AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
 class AppKernel extends Kernel
 {
@@ -18,11 +18,11 @@ class AppKernel extends Kernel
 
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle()
-        );
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+        ];
 
         if ($this->getEnvironment() == 'dev') {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
@@ -33,7 +33,6 @@ class AppKernel extends Kernel
 
     protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
     {
-
         if ($this->getEnvironment() == 'test') {
             $loader->load(__DIR__.'/config/config_test.yml');
         } else {
@@ -41,10 +40,10 @@ class AppKernel extends Kernel
         }
 
         if (isset($this->bundles['WebProfilerBundle'])) {
-            $c->loadFromExtension('web_profiler', array(
-                'toolbar' => true,
+            $c->loadFromExtension('web_profiler', [
+                'toolbar'             => true,
                 'intercept_redirects' => false,
-            ));
+            ]);
         }
 
         $c->register('file_uploader', 'App\\Uploader\\FileUploader');
@@ -58,10 +57,10 @@ class AppKernel extends Kernel
 
         $c->setDefinition('file_collection_manager', new Definition(
             'App\\Manager\\FileCollectionManager',
-            array(
+            [
                 $c->getParameter('upload_directory'),
                 $c->getParameter('file_collection_prefix'),
-            )
+            ]
         ));
     }
 

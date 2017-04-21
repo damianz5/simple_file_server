@@ -17,5 +17,4 @@ class FileCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($fileCollection->getName(), $fileCollectionName);
         $this->assertEquals($fileCollection->getDirectory(), $fileCollectionDirectory);
     }
-
 }
