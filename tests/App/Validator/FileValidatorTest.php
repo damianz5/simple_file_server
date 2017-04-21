@@ -15,7 +15,6 @@ class FileValidatorTest extends \PHPUnit_Framework_TestCase
         $htmlFile = $this->getMockFile('html');
         $txtFile = $this->getMockFile('txt');
 
-
         $this->assertTrue($fileValidator->validate($pngFile));
         $this->assertTrue($fileValidator->validate($htmlFile));
         $this->assertTrue($fileValidator->validate($txtFile));
@@ -29,7 +28,6 @@ class FileValidatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($fileValidator->validate($phpFile));
     }
-
 
     private function getMockFile($suffix)
     {

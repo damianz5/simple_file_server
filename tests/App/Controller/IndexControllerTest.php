@@ -2,8 +2,8 @@
 
 namespace Tests\Client;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class IndexControllerTest extends WebTestCase
 {
@@ -21,10 +21,10 @@ class IndexControllerTest extends WebTestCase
 
         $this->client->request(
             'GET',
-            '/api/list/' . $fileCollectionName,
-            array(),
-            array(),
-            array('HTTP_AUTHKEY' => 'code-for-tests')
+            '/api/list/'.$fileCollectionName,
+            [],
+            [],
+            ['HTTP_AUTHKEY' => 'code-for-tests']
         );
 
         $response = json_decode($this->client->getResponse()->getContent(), true);
@@ -52,9 +52,9 @@ class IndexControllerTest extends WebTestCase
         $this->client->request(
             'GET',
             '/api/list/195267c9b7f2daaa13e6b43351008d86',
-            array(),
-            array(),
-            array('HTTP_AUTHKEY' => 'some-invalid-key')
+            [],
+            [],
+            ['HTTP_AUTHKEY' => 'some-invalid-key']
         );
 
         $response = json_decode($this->client->getResponse()->getContent(), true);
@@ -69,9 +69,9 @@ class IndexControllerTest extends WebTestCase
         $this->client->request(
             'GET',
             '/api/list/12345678901234567890123456789012',
-            array(),
-            array(),
-            array('HTTP_AUTHKEY' => 'code-for-tests')
+            [],
+            [],
+            ['HTTP_AUTHKEY' => 'code-for-tests']
         );
 
         $response = json_decode($this->client->getResponse()->getContent(), true);

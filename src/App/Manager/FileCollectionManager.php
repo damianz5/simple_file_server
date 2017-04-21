@@ -2,9 +2,9 @@
 
 namespace App\Manager;
 
-use App\Model\FileCollection;
-use App\Exception\WrongCollectionNameException;
 use App\Exception\MissingCollectionDirectoryException;
+use App\Exception\WrongCollectionNameException;
+use App\Model\FileCollection;
 use Symfony\Component\Finder\Finder;
 
 class FileCollectionManager
@@ -22,6 +22,7 @@ class FileCollectionManager
      * List files in requested FileCollection.
      *
      * @param string $name File Collection name
+     *
      * @return array
      */
     public function listFiles($name)
@@ -34,7 +35,7 @@ class FileCollectionManager
         $files = [];
 
         foreach ($finder as $file) {
-            $files[] = $fileCollection->getDirectory() . $file->getRelativePathname();
+            $files[] = $fileCollection->getDirectory().$file->getRelativePathname();
         }
 
         return $files;
@@ -44,8 +45,10 @@ class FileCollectionManager
      * Get FileCollection if exists or create new based on provided $name.
      *
      * @param string $name
-     * @return FileCollection
+     *
      * @throws \Exception when provided $name is wrong.
+     *
+     * @return FileCollection
      */
     public function getOrCreate($name)
     {
@@ -66,8 +69,10 @@ class FileCollectionManager
      * Get FileCollection based on provided $name.
      *
      * @param string $name
-     * @return FileCollection
+     *
      * @throws MissingCollectionDirectoryException when FileCollection doesn't exists.
+     *
+     * @return FileCollection
      */
     private function get($name)
     {
@@ -87,6 +92,7 @@ class FileCollectionManager
      * Check if FileCollection exists based on provided $name.
      *
      * @param string $name
+     *
      * @return bool
      */
     private function exists($name)
@@ -107,15 +113,17 @@ class FileCollectionManager
      */
     private function generateName()
     {
-        return md5(microtime() . uniqid(rand(), true) . 'salt');
+        return md5(microtime().uniqid(rand(), true).'salt');
     }
 
     /**
      * Validate provided $name.
      *
      * @param string $name
-     * @return void
+     *
      * @throws WrongCollectionNameException when $name is wrong.
+     *
+     * @return void
      */
     private function validateName($name)
     {
@@ -128,12 +136,13 @@ class FileCollectionManager
      * Returns FileCollection directory.
      *
      * @param string $name
+     *
      * @return string
      */
     private function getDirectory($name)
     {
         return sprintf(
-            "%s%s%s/",
+            '%s%s%s/',
             $this->uploadDirectory,
             $this->fileCollectionPrefix,
             $name
