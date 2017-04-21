@@ -6,6 +6,9 @@
 
 [![Code Coverage](https://scrutinizer-ci.com/g/damianz5/simple_file_server/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/damianz5/simple_file_server/?branch=master)
 
+[![StyleCi.io](https://styleci.io/repos/78035427/shield?style=plastic&branch=master)](https://styleci.io/repos/78035427)
+
+
 see: `simpleClient.php`
 
 run:
