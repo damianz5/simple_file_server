@@ -2,8 +2,8 @@
 
 namespace Tests\Client;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadControllerTest extends WebTestCase
@@ -29,18 +29,18 @@ class UploadControllerTest extends WebTestCase
 
     public function testUploadToNewFileCollectionAction()
     {
-        $files = array(
+        $files = [
             $this->getMockFile('test1-copy.html', 'tests/Fixtures/test1-copy.html'),
             $this->getMockFile('test1-copy.png', 'tests/Fixtures/test1-copy.png'),
             $this->getMockFile('test1-copy.txt', 'tests/Fixtures/test1-copy.txt'),
-        );
+        ];
 
         $this->client->request(
             'POST',
             '/api/upload',
-            array(),
+            [],
             $files,
-            array('HTTP_AUTHKEY' => 'code-for-tests')
+            ['HTTP_AUTHKEY' => 'code-for-tests']
         );
 
         $response = json_decode($this->client->getResponse()->getContent(), true);
@@ -66,16 +66,16 @@ class UploadControllerTest extends WebTestCase
      */
     public function testUploadToExistFileCollectionAction($collectionName)
     {
-        $files = array(
+        $files = [
             $this->getMockFile('test1-copy.png', 'tests/Fixtures/test1-copy.png'),
-        );
+        ];
 
         $this->client->request(
             'POST',
-            '/api/upload/' . $collectionName,
-            array(),
+            '/api/upload/'.$collectionName,
+            [],
             $files,
-            array('HTTP_AUTHKEY' => 'code-for-tests')
+            ['HTTP_AUTHKEY' => 'code-for-tests']
         );
 
         $response = json_decode($this->client->getResponse()->getContent(), true);
@@ -103,10 +103,10 @@ class UploadControllerTest extends WebTestCase
     {
         $this->client->request(
             'GET',
-            '/api/list/' . $collectionName,
-            array(),
-            array(),
-            array('HTTP_AUTHKEY' => 'code-for-tests')
+            '/api/list/'.$collectionName,
+            [],
+            [],
+            ['HTTP_AUTHKEY' => 'code-for-tests']
         );
 
         $response = json_decode($this->client->getResponse()->getContent(), true);
@@ -132,9 +132,9 @@ class UploadControllerTest extends WebTestCase
         $this->client->request(
             'POST',
             '/api/upload',
-            array(),
-            array(),
-            array('HTTP_AUTHKEY' => 'some-invalid-key')
+            [],
+            [],
+            ['HTTP_AUTHKEY' => 'some-invalid-key']
         );
 
         $response = json_decode($this->client->getResponse()->getContent(), true);
@@ -146,7 +146,7 @@ class UploadControllerTest extends WebTestCase
 
     private function cleanupFiles($filesList, $collectionName)
     {
-        foreach($filesList as $file) {
+        foreach ($filesList as $file) {
             @unlink($file);
         }
 

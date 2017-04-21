@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Model\FileCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UploadController extends Controller
@@ -15,7 +15,9 @@ class UploadController extends Controller
     /**
      * @Route("/api/upload/{name}", defaults={"name" = null}, requirements={"name" = "^[a-f0-9]{32}$"})
      * @Method({"POST"})
+     *
      * @param string|null $name
+     *
      * @return JsonResponse
      */
     public function uploadAction($name = null)
@@ -30,17 +32,16 @@ class UploadController extends Controller
                 $fileCollection
             );
 
-            return new JsonResponse(array(
-                'status' => 'ok',
+            return new JsonResponse([
+                'status'          => 'ok',
                 'collection_name' => $fileCollection->getName(),
-                'files' => $newFiles
-            ));
+                'files'           => $newFiles,
+            ]);
         } catch (\Exception $e) {
-            return new JsonResponse(array(
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ));
+            return new JsonResponse([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
         }
     }
-
 }
