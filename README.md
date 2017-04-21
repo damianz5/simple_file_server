@@ -8,6 +8,7 @@
 
 [![StyleCi.io](https://styleci.io/repos/78035427/shield?style=plastic&branch=master)](https://styleci.io/repos/78035427)
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/8dff597a-369f-4ec8-8ac4-787f5feb3f05/big.png)](https://insight.sensiolabs.com/projects/8dff597a-369f-4ec8-8ac4-787f5feb3f05)
 
 see: `simpleClient.php`
 

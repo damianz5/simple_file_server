@@ -12,7 +12,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 $loader = require __DIR__.'/../vendor/autoload.php';
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
-class AppKernel extends Kernel
+class MicroKernel extends Kernel
 {
     use MicroKernelTrait;
 
@@ -46,21 +46,28 @@ class AppKernel extends Kernel
             ]);
         }
 
-        $c->register('file_uploader', 'App\\Uploader\\FileUploader');
-        $c->register('file_validator', 'App\\Validator\\FileValidator');
+        $c->register('app.file_uploader', 'App\\Uploader\\FileUploader');
+        $c->register('app.file_validator', 'App\\Validator\\FileValidator');
 
         $uploadManagerDefinition = (new Definition(
             'App\\Manager\\UploadManager'
         ))->setAutowired(true);
 
-        $c->setDefinition('upload_manager', $uploadManagerDefinition);
+        $c->setDefinition('app.upload_manager', $uploadManagerDefinition);
 
-        $c->setDefinition('file_collection_manager', new Definition(
+        $c->setDefinition('app.file_collection_manager', new Definition(
             'App\\Manager\\FileCollectionManager',
             [
                 $c->getParameter('upload_directory'),
                 $c->getParameter('file_collection_prefix'),
             ]
+        ));
+
+        $c->setDefinition('app.exception_listener', (new Definition(
+            'App\\EventListener\\ExceptionListener'
+        ))->addTag(
+            'kernel.event_listener',
+            ['event' => 'kernel.exception']
         ));
     }
 

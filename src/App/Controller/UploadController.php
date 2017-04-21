@@ -23,25 +23,30 @@ class UploadController extends Controller
     public function uploadAction($name = null)
     {
         try {
-            $this->checkCredentials();
-
-            /** @var $fileCollection FileCollection */
-            $fileCollection = $this->get('file_collection_manager')->getOrCreate($name);
-
-            $newFiles = $this->get('upload_manager')->upload(
-                $fileCollection
-            );
-
-            return new JsonResponse([
-                'status'          => 'ok',
-                'collection_name' => $fileCollection->getName(),
-                'files'           => $newFiles,
-            ]);
+            return $this->upload($name);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'status'  => 'error',
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    private function upload($name)
+    {
+        $this->checkCredentials();
+
+        /** @var $fileCollection FileCollection */
+        $fileCollection = $this->get('app.file_collection_manager')->getOrCreate($name);
+
+        $newFiles = $this->get('app.upload_manager')->upload(
+            $fileCollection
+        );
+
+        return new JsonResponse([
+            'status'          => 'ok',
+            'collection_name' => $fileCollection->getName(),
+            'files'           => $newFiles,
+        ]);
     }
 }

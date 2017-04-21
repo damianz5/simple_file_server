@@ -1,4 +1,15 @@
 {
+    "name": "damianz5/simple-file-server",
+    "description": "Simple file server with file upload using API.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Damian Zabawa",
+            "email": "damian.zabawa@gmail.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": ">=5.6",
         "symfony/symfony": "^3.2",
@@ -11,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "App\\": "src/App/"
         }
     },
     "config": {

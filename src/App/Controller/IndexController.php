@@ -22,19 +22,24 @@ class IndexController extends Controller
     public function listAction($name)
     {
         try {
-            $this->checkCredentials();
-            $files = $this->get('file_collection_manager')->listFiles($name);
-
-            return new JsonResponse([
-                'status'          => 'ok',
-                'collection_name' => $name,
-                'files'           => $files,
-            ]);
+            return $this->listFiles($name);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'status'  => 'error',
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    private function listFiles($name)
+    {
+        $this->checkCredentials();
+        $files = $this->get('app.file_collection_manager')->listFiles($name);
+
+        return new JsonResponse([
+            'status'          => 'ok',
+            'collection_name' => $name,
+            'files'           => $files,
+        ]);
     }
 }
