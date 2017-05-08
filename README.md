@@ -8,11 +8,21 @@
 
 [![StyleCi.io](https://styleci.io/repos/78035427/shield?style=plastic&branch=master)](https://styleci.io/repos/78035427)
 
+[![Latest Stable Version](https://poser.pugx.org/damianz5/simple-file-server/v/stable.png)](https://packagist.org/packages/damianz5/simple-file-server)
+
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/8dff597a-369f-4ec8-8ac4-787f5feb3f05/big.png)](https://insight.sensiolabs.com/projects/8dff597a-369f-4ec8-8ac4-787f5feb3f05)
 
-see: `simpleClient.php`
+Installation
+------------
+```
+composer create-project damianz5/simple-file-server
+```
+___
 
-run:
+
+Test run
+------------
+
 ```
 cd web;
 php -S localhost:8081 app.php
@@ -60,10 +70,12 @@ using https://httpie.org/
 http GET http://127.0.0.1:8081/api/list/beefbeefbeefbeefbeefbeefbeefbeef AUTHKEY:supersecretcode1@
 ```
 
-IMPORTANT:
+IMPORTANT
+------------
  - change credentials keys in `app/config/parameters.yml`
  - check `upload_max_filesize` and `post_max_size` in your `php.ini`
 
-TODO:
+TODO
+------------
  - add `more` tests
  - invalid uploaded files should return more information
