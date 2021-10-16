@@ -1,0 +1,5 @@
+parameters:
+    app.upload_directory: "tests/Fixtures/"
+    app.file_collection_prefix: "test-"
+    app.access_list:
+        - "code-for-tests"

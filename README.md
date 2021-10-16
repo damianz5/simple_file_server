@@ -24,13 +24,12 @@ Test run
 ------------
 
 ```
-cd web;
-php -S localhost:8081 app.php
+symfony server:start --port 8083 --no-tls
 ```
 
 simple vanilla php client:
 ```
-php simpleClient.php
+php example/simpleClient.php
 ```
 should return (container name will be different)
 ```
@@ -45,7 +44,7 @@ add new files to new collection:
 ```
 curl -H 'AUTHKEY:supersecretcode1@' \
 -F "image=@screenshot.png" -F "xx=@content.html" \
-http://127.0.0.1:8081/api/upload
+http://127.0.0.1:8083/api/upload
 ```
 
 ___
@@ -53,7 +52,7 @@ add new files to existing collection:
 ```
 curl -H 'AUTHKEY:supersecretcode1@' \
 -F "image=@screenshot.png" -F "xx=@content.html" \
-http://127.0.0.1:8081/api/upload/ddf59d090e70094429414935c5ea53a1
+http://127.0.0.1:8083/api/upload/ddf59d090e70094429414935c5ea53a1
 ```
 
 ___
@@ -62,12 +61,12 @@ list files:
 
 ```
 curl -H 'AUTHKEY:supersecretcode1@' \
-http://127.0.0.1:8081/api/list/ddf59d090e70094429414935c5ea53a1
+http://127.0.0.1:8083/api/list/ddf59d090e70094429414935c5ea53a1
 ```
 
 using https://httpie.org/
 ```
-http GET http://127.0.0.1:8081/api/list/beefbeefbeefbeefbeefbeefbeefbeef AUTHKEY:supersecretcode1@
+http GET http://127.0.0.1:8083/api/list/beefbeefbeefbeefbeefbeefbeefbeef AUTHKEY:supersecretcode1@
 ```
 
 IMPORTANT
